@@ -18,24 +18,27 @@ except:
 
 search_icon = driver.find_element(By.CLASS_NAME, value="icon-search")
 search_icon.click()
-print("1")
+
 
 search = driver.find_element(By.CLASS_NAME, "form-control")
-print("2")
+
 search.send_keys("Test")
-print("3")
+
 search.send_keys(Keys.RETURN)
 
 time.sleep(4)
 
 try:
+    print("1")
     postsField = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID,"posts"))
+        EC.presence_of_element_located((By.CLASS_NAME,"minititle"))
     )
-    posts = postsField.find_elements(By.TAG_NAME, "h2")
+    print("2")
+    posts = driver.find_elements(By.CLASS_NAME,"sneakpeak")
     for post in posts:
-        header = post
-
+        header = post.find_element(By.CLASS_NAME,"minititle")
+        print(header.text)
+    
 finally:
     driver.close()
 
